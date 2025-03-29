@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coffee Order</title>
+  <style>
+    body {
+      background-color: lightgray;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: brown;
+    }
+    #receipt {
+      margin-top: 20px;
+      background-color: white;
+      padding: 10px;
+      border: 1px solid black;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My Coffee Shop</h1>
+  <form id="orderForm">
+    <label>What's your name?</label><br>
+    <input type="text" id="name"><br><br>
+
+    <label>What kind of coffee? (espresso, latte, americano)</label><br>
+    <input type="text" id="coffee"><br><br>
+
+    <label>Do you want sugar? (yes or no)</label><br>
+    <input type="text" id="sugar"><br><br>
+
+    <button type="submit">Order</button>
+  </form>
+
+  <div id="receipt"></div>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      var name = document.getElementById("name").value;
+      var coffee = document.getElementById("coffee").value.toLowerCase();
+      var sugar = document.getElementById("sugar").value.toLowerCase();
+
+      if (name === "" || (coffee !== "espresso" && coffee !== "latte" && coffee !== "americano") || (sugar !== "yes" && sugar !== "no")) {
+        alert("Please fill out everything correctly.");
+        return;
+      }
+
+      var sugarText = sugar === "yes" ? "with sugar" : "without sugar";
+      var receiptText = "One " + coffee + " " + sugarText + " coming right up, " + name + "!";
+
+      var receiptDiv = document.getElementById("receipt");
+      receiptDiv.innerText = receiptText;
+      receiptDiv.style.display = "block";
+    });
+  </script>
+</body>
+</html>
